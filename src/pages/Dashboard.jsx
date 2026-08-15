@@ -5,9 +5,8 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
 import { useFoodLog } from '../hooks/useFoodLog'
 import MacroRing from '../components/MacroRing'
-import { DAY_TYPES, TARGET_KCAL_FIELD, todayISO } from '../lib/dayTypes'
-
-const WEEK_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+import { todayISO } from '../lib/date'
+import { DAY_TYPES, TARGET_KCAL_FIELD, WEEKDAYS, WEEKDAY_LABELS } from '../lib/constants'
 
 function startOfWeek(date) {
   const d = new Date(date)
@@ -92,7 +91,7 @@ export default function Dashboard() {
     setWeekData(
       weekDates.map((date, i) => ({
         date,
-        label: WEEK_LABELS[i],
+        label: WEEKDAY_LABELS[WEEKDAYS[i]],
         dayType: dayTypeByDate[date] ?? null,
         completed: completedDates.has(date),
         isToday: date === today,
